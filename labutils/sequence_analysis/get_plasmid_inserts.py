@@ -139,7 +139,7 @@ def main():
         extract = extract_insert_and_flanks(concat_read, pos_dict) if pos_dict else None
         if extract:
             extracted.append(extract)
-            fastq_inserts.append(extract_insert_fastq(read, pos_dict))
+            fastq_inserts.append(extract_insert_fastq(concat_read, pos_dict))
 
     print(f'Number of reads: {len(reads)}')
     print(f'Number of matches found: {len(extracted)}')
