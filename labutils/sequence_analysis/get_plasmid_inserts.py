@@ -2,6 +2,7 @@
 
 import argparse
 import edlib
+import pickle
 from labutils.sequence_analysis.utils import read_fastq, revcomp, is_DNA
 
 
@@ -106,6 +107,7 @@ def main():
     parser.add_argument("-t", "--threshold", default=None, type=int, help="threshold (maximum distance) for upstream and downstream matching")
     parser.add_argument("-n", "--no-empty", action='store_true', help="don't save matches with no insert in table")
     parser.add_argument("-r", "--revcomp", action='store_true', help="also print reverse complement of inserts in table")
+    parser.add_argument("-p", "--pickle", action='store_true', help="save pickled list of inserts")
     parser.add_argument("-q", "--quality", action='store_true', help="also print quality of inserts and upstream/downstream in table")
     parser.add_argument("-o", "--output", default="inserts", type=str, help="file name for output")
     args = parser.parse_args()
@@ -171,6 +173,11 @@ def main():
     with open(f'{args.output}.fastq', 'w') as f:
         for header, seq, qual in fastq_inserts:
             f.write(f'{header}\n{seq}\n+\n{qual}\n')
+
+    if args.pickle:
+        print(f'Saving pickled inserts to {args.output}.pkl')
+        with open(f'{args.output}.pkl', 'wb') as f:
+            pickle.dump(extracted, f)
 
 if __name__ == '__main__':
     main()
