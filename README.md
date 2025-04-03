@@ -44,6 +44,10 @@ sequences easily as they are all aligned in a column. Optionally, quality can be
 the `-q` argument, the reverse complement of the inserts can be added with the `-r` argument,
 and empty inserts can be excluded with the `-n` argument.
 
+Optionally, a pickled list of extracted inserts containing lists of (sequence, quality) 
+tuples for upstream matched region, insert, and downstream matched region for each read can be 
+saved using the `-p` argument.
+
 ## data_vis
 
 This package is for visualization of sequencing data.
